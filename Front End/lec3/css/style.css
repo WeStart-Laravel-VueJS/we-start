@@ -1,0 +1,238 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap'); */
+
+@font-face {
+    src: url(../fonts/Pangolin-Regular.ttf);
+    font-family: 'Mohammed';
+}
+
+@font-face {
+    font-family: 'New';
+    src: url(../fonts/font.otf);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Mohammed';
+    padding-top: 55px;
+}
+
+header {
+    padding: 15px 80px;
+    background: #f3f3f3;
+    position: sticky;
+    width: 100%;
+    top: 0;
+    /* height: 60px;
+    bottom: 0; */
+    box-shadow: 0 1px 10px #8888884e;
+}
+
+header a {
+    text-decoration: none;
+    color: #222;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo a {
+    font-size: 20px;
+}
+
+header .logo a span {
+    color: #f00;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+header nav ul li {
+    margin: 0 10px;
+}
+.new, .div1 {
+    font-family: 'New';;
+}
+
+.container {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.box {
+    width: 100px;
+    height: 100px;
+    /* background: #eee; */
+}
+
+.about {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.services {
+    /* background-color: #f7f7f7; */
+    background-image: url(../images/snow.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-size: 100%;
+    background-position: center;
+    background-attachment: fixed;
+    /* background-position: 10px 50px; */
+    color: #fff;
+}
+
+.overlay {
+    background-color: rgba(0 0 0 / .5);
+    padding: 60px 0;
+    /* opacity: .5; */
+}
+
+/* 
+-- Box Model 
+1. Margin
+2. Border
+3. Padding
+4. Content
+*/
+
+.div1 {
+    background: #c218a8;
+    margin-bottom: 30px;
+    padding: 10px;
+    border-radius: 59% 41% 61% 39% / 36% 60% 40% 64%;
+     
+}
+
+div.div2 {
+    /* background: #1293aa; */
+    /* border-radius: 50% */
+    margin: 50px;
+    /* border: 1px solid #eee; */
+    box-shadow: 0 0 10px rgba(51, 51, 51, 0.09);
+}
+
+.div3 {
+    background: #a02548;
+}
+
+h1 {
+    text-shadow: 0px 0px 5px rgba(255, 0, 0, 0.343);
+}
+
+/* 
+- Display
+1. None
+2. Inline
+3. Block
+4. Inline-Block
+5. Flex
+6. Inline-Flex
+7. Grid
+8. Inline-Grid
+*/
+
+.more {
+    display: none;
+}
+
+.sidemenu {
+    position: fixed;
+    top: 0;
+    left: -350px;
+    width: 300px;
+    height: 100%;
+    background-color: #f5f5f5;
+    box-shadow: 1px 0 5px #81818131;
+    padding: 50px 20px;
+}
+.sidemenu .logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.sidemenu .logo img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.sidemenu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0
+}
+
+.sidemenu ul li a {
+    text-decoration: none;
+    /* background-color: rgb(230, 230, 230); */
+    display: block;
+    padding: 10px 15px;
+    color: #333;
+    transition: all .3s ease;
+}
+
+.sidemenu ul li a:hover {
+    background: #e8e8e8;
+    /* background: #f00; */
+   
+}
+
+.sidemenu ul li:not(:last-child) a {
+    border-bottom: 1px solid #d8d8d8;
+}
+
+.item {
+    width: 24.73%;
+    height: 100px;
+    background: #28c596;
+    display: inline-block;
+}
+
+/* * => universal  */
+/* p => TgaNAme  */
+/* #new => ID */
+/* .new => Class */
+/* [name] => Attribute */
+/* div:not(.new) => All div except div with class new  */
+/* div , p => Group Selector  */
+/* div p span => Decadent Selector , Tree Selector */
+/* div > span => direct child */
+/* div + span => Adjacent Selector */
+/* li:first-of-type :last-of-type :first-child :last-child => Selector Child Pseudo */
+/* :nth-child(odd) */
+/* div.new */
+
+
+.table {
+    border-collapse: collapse;
+    width: 70%;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.table th {
+    background: #333;
+    color: #fff;
+}
+
+.table tr:nth-child(odd) {
+    background-color: #f3f3f3;
+}
+
+.table tr:hover {
+    background-color: #eee;
+}

@@ -1,0 +1,29 @@
+/* Typography */
+*, ::before, ::after {
+    box-sizing: border-box;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.item {
+    width: 100px;
+    height: 100px;
+    background: lightcoral;
+}
+
+#div1 {
+    background: red;
+    /* margin: 10px 20px 30px 40px; */
+    margin-bottom: 20px;
+}
+
+#div2 {
+    background: blue;
+}
+
+#div3 {
+    background: gray;
+}
