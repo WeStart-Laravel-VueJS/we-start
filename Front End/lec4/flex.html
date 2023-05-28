@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            padding: 10px 0;
+        }
+
+        header nav {
+            width: 80%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        header ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        header ul li {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .clients-area {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            /* gap: 20px; */
+        }
+
+        .clients-area > div {
+            width: 20%;
+            padding: 10px;
+            border: 1px solid #eee;
+        }
+
+        .clients-area img {
+            /* width: 14%; */
+            width: 100%;
+            height: 120px;
+            object-fit: contain;
+            
+            padding: 10px;
+            /* margin: 10px; */
+            filter: grayscale(100%);
+            transition: all .3s ease;
+        }
+
+        .clients-area img:hover {
+            filter: grayscale(0);
+            /* transform: rotate(5deg) scale(1.1); */
+            transform:scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">
+                <!-- <a href="#">Site Logo</a> -->
+                <a href="#">
+                    <img src="https://via.placeholder.com/70x80" alt="">
+                </a>
+            </div>
+
+            <!-- <div class="logo">
+                <a href="#">Site Logo</a>
+            </div> -->
+
+            <div class="menu">
+                <ul>
+                    <li><a href="">Item 1</a></li>
+                    <li><a href="">Item 2</a></li>
+                    <li><a href="">Item 3</a></li>
+                    <li><a href="">Item 4</a></li>
+                    <li><a href="">Item 5</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Lorem ipsum dolor sit amet.</h1>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis laboriosam,</p>
+                <a href="">Learn More</a>
+                <a href="">Join Now</a>
+            </div>
+        </section>
+        <section class="clients">
+
+            <div class="container">
+
+                <div class="clients-area">
+                    <div><img src="images/1.jpeg" alt=""></div>
+                    <div><img src="images/2.jpg" alt=""></div>
+                    <div><img src="images/3.jpg" alt=""></div>
+                    <div><img src="images/4.jpg" alt=""></div>
+                    <div><img src="images/5.jpg" alt=""></div>
+                    <div><img src="images/6.jpg" alt=""></div>
+                    <div><img src="images/7.png" alt=""></div>
+                </div>
+
+            </div>
+
+        </section>
+    </main>
+    
+</body>
+</html>
