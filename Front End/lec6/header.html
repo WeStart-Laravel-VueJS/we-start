@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=], initial-scale=1.0">
+    <title>Header</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 2000px;
+        }
+
+        header {
+            position: fixed;
+            width: 100%;
+            padding: 10px 0;
+            /* background-color: #333; */
+            transition: all .3s ease-in;
+        }
+
+        header a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        header.fixed {
+            background-color: #333;
+        }
+
+        header.fixed a {
+            color: #fff;
+        }
+
+        header nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+    </style>
+
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="#">Logo</a>
+            </div>
+
+            <div class="menu">
+                <a href="">Home</a>
+            </div>
+        </nav>
+    </header>
+    
+    <img class="hero" src="https://via.placeholder.com/1800x600" alt="">
+
+    <script>
+
+        window.onload = () => {
+            let header = document.querySelector('header')
+            let body = document.querySelector('body')
+            let hero = document.querySelector('.hero')
+
+        
+            let heroheight = hero.offsetHeight;
+            let headerheight = header.offsetHeight;
+
+            window.onscroll = (e) => {
+
+
+                var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+                if(scrollTop > (heroheight - headerheight )) {
+                    header.classList.add('fixed')
+                }else {
+                    header.classList.remove('fixed')
+                }
+
+                // console.log(scrollTop);
+            }
+        }
+        
+
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Mode</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        
+        header {
+            padding: 10px 0;
+            background-color: #333;
+        }
+
+        header a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        header nav {
+            width: 80%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .box {
+            background-color: #888;
+            margin: 30px 0;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        /* Dark Theme */
+
+        .dark {
+            background-color: #1e1e1e;
+            color: #fff;
+        }
+
+        .dark header {
+            background-color: #eee;
+        }
+
+        .dark header a {
+            color: #333;
+        }
+
+        .dark .box {
+            background-color: #f7f7f7;
+            color: #555;
+        }
+
+        
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="#">Logo</a>
+            </div>
+
+            <div class="menu">
+                <button class="mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+    
+    <main>
+
+        <div class="container">
+
+            <div class="box">
+                <p>Lorem ipsum dolor sit amet.</p>
+            </div>
+
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quo mollitia recusandae temporibus, tenetur aperiam aspernatur officia facilis et debitis repellat aliquam velit, veniam iusto ipsa laudantium! Ipsam quasi facilis ad.</p>
+
+        </div>
+
+    </main>
+
+    <script>
+
+        window.onload = () => {
+            let btn = document.querySelector('.mode')
+
+            let mode = localStorage.getItem('dark')
+
+            if(mode == 0) {
+                document.body.classList.toggle('dark')
+                btn.querySelector('i').classList.toggle('fa-sun')
+                btn.querySelector('i').classList.toggle('fa-moon')
+            }
+
+            btn.onclick = () => {
+
+                let newval = mode == 0 ? 1 : 0;
+                localStorage.setItem('dark', newval)
+                document.body.classList.toggle('dark')
+                btn.querySelector('i').classList.toggle('fa-sun')
+                btn.querySelector('i').classList.toggle('fa-moon')
+
+            }
+        }
+
+    </script>
+</body>
+</html>

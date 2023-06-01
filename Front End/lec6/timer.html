@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="author" content="" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <title>Timer</title>
+
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .disabled {
+            color: #a3a3a3;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <p>you can download after <span class="seconds">7</span> seconds</p>
+
+    <a href="images/Front5.rar" download class="link disabled">Download</a>
+    
+    <script>
+
+        
+        let link = document.querySelector('.link')
+
+        let seconds = document.querySelector('.seconds')
+
+        let time = seconds.innerHTML;
+
+        let counter = setInterval(() => {
+            // seconds.innerHTML = parseInt(seconds.innerHTML) + 1;
+            seconds.innerHTML = parseInt(seconds.innerHTML) - 1;
+
+            if(seconds.innerHTML == 0) {
+                clearInterval(counter);
+                link.classList.remove('disabled')
+            }
+        }, 1000)
+
+
+
+
+
+        // setInterval(() => {
+        //     console.log('Interval');
+        // }, 1000)
+
+        // setTimeout(() => {
+        //     // console.log('Timeout');
+        //     link.classList.remove('disabled')
+        // }, 5000)
+
+    </script>
+</body>
+</html>
