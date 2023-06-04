@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clipboard</title>
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .text {
+            padding: 10px;
+            background-color: #f7f7f7;
+            margin: 20px 0;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            /* align-items: center; */
+        }
+
+        .text i {
+            cursor: pointer;
+            /* opacity: .8; */
+            transition: all .3s ease;
+            color: #b9b9b9;
+        }
+
+        .text i:hover {
+            color: #6e6e6e;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati aperiam omnis veritatis, labore voluptatum consequatur quae est alias. Qui laboriosam facilis eligendi? Aliquid assumenda voluptas obcaecati non alias quo id.</p>
+
+        <div class="text">
+            <span>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iure, sed. Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias alias saepe odio doloremque nemo provident dicta sapiente consequatur iste natus odit commodi officiis quae, modi earum, neque minus iusto laudantium.</span>
+
+            <i class="fas fa-copy copy"></i>
+        </div>
+
+        <div class="text">
+            <span>Mohammed Abu Alqumbuz</span>
+
+            <i class="fas fa-copy copy"></i>
+        </div>
+
+    </div>
+
+    <script>
+
+        window.onload = () => {
+
+            document.oncopy = () => {
+                let url = window.location.href
+
+                let text = window.getSelection().toString();
+
+                let fulltext = `${text} 
+                
+                Read More At ${url}`
+
+                // navigator.clipboard.writeText(text + '\n\nRead More At ' + url)
+                navigator.clipboard.writeText(fulltext)
+                // console.log(url, text);
+
+                // return false;
+            }
+
+            let copyitems = document.querySelectorAll('.copy')
+
+            copyitems.forEach(el => {
+                el.onclick = () => {
+                    let text = el.previousElementSibling.innerText
+                    navigator.clipboard.writeText(text)
+                }
+            })
+        }
+    </script>
+    
+</body>
+</html>

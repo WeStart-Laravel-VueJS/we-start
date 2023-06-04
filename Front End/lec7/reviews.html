@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews</title>
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        body {
+            background-color: #dfe4e3;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .slider-box {
+            background-color: #fff;
+            width: 50%;
+            margin: 10% auto 0;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            position: relative;
+        }
+
+        .slider-box button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 30px;
+            border: 0;
+            background-color: #428074;  
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+            left: 0;
+            cursor: pointer;
+            transition: all .4s ease;
+        }
+
+        .slider-box button:hover {
+            background-color: #5dac9c; 
+        }
+
+        button.right {
+            left: unset;
+            right: 0;
+        }
+
+        .slider-box img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+
+        
+        <div class="slider-box">
+            <img src="" alt="">
+            <h2></h2>
+            <h6></h6>
+            <p></p>
+
+            <button class="left"><i class="fas fa-chevron-left"></i></button>
+            <button class="right"><i class="fas fa-chevron-right"></i></button>
+        </div>
+
+    </div>
+
+
+    <script>
+
+
+        let reviews = [
+            {
+                img : 'https://react.semantic-ui.com/images/avatar/large/matthew.png',
+                name : 'matthew',
+                job: 'Graphic Design',
+                text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. In, quisquam.'
+            },
+
+            {
+                img : 'https://react.semantic-ui.com/images/avatar/large/elliot.jpg',
+                name : 'elliot',
+                job: 'Web Design',
+                text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. In, quisquam.'
+            },
+
+            {
+                img : 'https://react.semantic-ui.com/images/avatar/large/stevie.jpg',
+                name : 'stevie',
+                job: 'UX / UI',
+                text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. In, quisquam.'
+            },
+        ];
+
+        let img = document.querySelector('.slider-box img');
+        let name = document.querySelector('.slider-box h2');
+        let job = document.querySelector('.slider-box h6');
+        let text = document.querySelector('.slider-box p');
+        let next = document.querySelector('.slider-box .right');
+        let prev = document.querySelector('.slider-box .left');
+
+        let currentItem = 0;
+
+        window.onload = () => {
+            showReview()
+        }
+
+        function showReview() {
+            img.src = reviews[currentItem].img
+            name.innerHTML = reviews[currentItem].name
+            job.innerHTML = reviews[currentItem].job
+            text.innerHTML = reviews[currentItem].text
+        }
+
+        next.onclick = () => {
+            currentItem++;
+            // if(currentItem == reviews.length) {
+            //     currentItem = 0
+            // }
+            currentItem = currentItem % reviews.length;
+            showReview()
+
+            // if(currentItem == reviews.length - 1) {
+                
+            //     // next.disabled = true;
+            //     next.setAttribute('disabled', true)
+            // }
+        }
+
+        prev.onclick = () => {
+            currentItem--;
+            
+            currentItem = (currentItem + reviews.length) % reviews.length;
+            // if(currentItem < 0) {
+            //     currentItem = reviews.length - 1;
+            // }
+
+            showReview();
+        }
+
+        setInterval(e => {
+            currentItem++;
+            currentItem = currentItem % reviews.length;
+            showReview()
+        }, 3000)
+    </script>
+    
+</body>
+</html>

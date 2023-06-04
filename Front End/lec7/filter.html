@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="author" content="" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <title></title>
+
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .categories-wrapper {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .categories-wrapper button {
+            border: 0;
+            padding: 10px 20px;
+            background-color: #cacaca;
+            color: #333;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all .3s ease;
+        }
+
+        .categories-wrapper button:hover,
+        .categories-wrapper button.active {
+            background-color: #b92ca4;
+            color: #fff;
+        }
+
+        .items-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .items-wrapper .item {
+                width: 23%;
+                height: 200px;
+                background-color: #eee;
+                margin: 1%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="categories-wrapper">
+            <button class="active" data-category="all" onclick="filterItems(event)">All</button>
+            <button data-category="web_design" onclick="filterItems(event)">Web Design</button>
+            <button data-category="graphic_design" onclick="filterItems(event)">Graphic Design</button>
+            <button data-category="back_end" onclick="filterItems(event)">Back End</button>
+            <button data-category="front_end" onclick="filterItems(event)">Front End</button>
+            <button data-category="ui_ux" onclick="filterItems(event)">UI/UX</button>
+        </div>
+
+        <div class="items-wrapper">
+            <div class="item web_design">
+                Web Design
+            </div>
+
+            <div class="item ui_ux">
+                UI / UX
+            </div>
+
+            <div class="item graphic_design">
+                Graphic Design
+            </div>
+
+            <div class="item web_design">
+                Web Design
+            </div>
+
+            <div class="item web_design">
+                Web Design
+            </div>
+
+            <div class="item front_end back_end">
+                Front End / Back End
+            </div>
+
+            <div class="item front_end">
+                Front End
+            </div>
+
+            <div class="item web_design">
+                Web Design
+            </div>
+
+            <div class="item back_end">
+                Back End
+            </div>
+
+            <div class="item back_end">
+                Back End
+            </div>
+            
+            <div class="item ui_ux">
+                UI / UX
+            </div>
+
+            <div class="item graphic_design">
+                Graphic Design
+            </div>
+        </div>
+
+    </div>
+    
+    <script>
+        // window.onload = () => {
+            
+
+        //     // for(let i = 0 ; i < btns.length ; i++) {
+        //     //     btns[i].onclick = () => {
+        //     //         alert('s')
+        //     //     }
+        //     // }
+
+        // }
+
+        function filterItems(e) {
+            let btns = document.querySelectorAll('.categories-wrapper button')
+            let items = document.querySelectorAll('.items-wrapper .item')
+
+            // console.log(e);
+            for(let i = 0 ; i < btns.length ; i++) {
+                btns[i].classList.remove('active')
+            }
+            e.target.classList.add('active')
+
+            let item_selected = e.target.dataset.category
+            // let category = e.target.getAttribute('data-category')
+
+            for(let i = 0 ; i < items.length ; i++) {
+                items[i].style.display = 'none'
+            }
+
+            let items_selected = document.querySelectorAll('.'+item_selected)
+            for(let i = 0 ; i < items_selected.length ; i++) {
+                items_selected[i].style.display = 'flex'
+            }
+
+            if(item_selected == 'all') {
+                for(let i = 0 ; i < items.length ; i++) {
+                    items[i].style.display = 'flex'
+                }
+            }
+
+
+
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>operators</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="item">
+            
+        </div>
+
+    </div>
+
+    <script>
+
+        function printUserInfo(name, age, ...parms) {
+            console.log(name + ' ' + age, parms);
+        }
+
+        printUserInfo('Ali', 20, '10-10-2011', 'red');
+
+        // let family1 = ['Ali', 'Ahmed', 'Manal']
+        // let family2 = [...family1, 'Zina', 'Sama']
+
+        // // family2[0] = 'Sara';
+
+        // console.log(family1, family2);
+
+
+
+        // let person = {
+        //     name: 'Mohammed',
+        //     age: 29,
+        //     job: 'developer'
+        // }
+
+        // let { name , age , job } = person
+
+        // console.log(name,age, job);
+
+        window.onload = () => {
+
+            let item = document.querySelector('.item')
+
+            // let img = 'https://react.semantic-ui.com/images/avatar/large/stevie.jpg'
+            let price = 50
+            let title = 'Mohammed Naji'
+            let text = 'lorem lorem'
+
+            // item.innerHTML = '<img src="'+img+'" alt="">';
+            // item.innerHTML += '<h2>'+title+'</h2>';
+            // item.innerHTML += '<p>'+text+'</p>'
+
+            // item.innerHTML = `
+            // <img src="${img}" alt="">
+            // <h2>${title}</h2>
+            // <p>${text}</p>
+            // `
+
+            item.innerHTML = `
+            <h2>${title}</h2>
+            <p>${text}</p>
+            <b>${price < 100 ? 'Sale ' + price : ''}</b>
+            `
+
+        }
+
+    </script>
+
+</body>
+</html>
