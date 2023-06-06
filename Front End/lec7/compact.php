@@ -13,3 +13,5 @@ $finale = [];
 foreach($params as $pr) {
     $finale[$pr] = $GLOBALS[$pr];
 }
+
+extract($finale);

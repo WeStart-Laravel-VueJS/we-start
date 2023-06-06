@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <br>
+    <br>
+    <div class="container">
+
+        <button onclick="loadPosts(event)">Load Posts <i class="fas fa-spinner fa-spin hide"></i></button>
+        <div id="posts-wrapper">
+
+        </div>
+
+    </div>
+
+    <script>
+
+
+
+        function loadPosts(e) {
+
+            e.target.setAttribute('disabled', true)
+            e.target.getElementsByTagName('i')[0].classList.remove('hide')
+
+
+            var wrapper = document.getElementById('posts-wrapper')
+            wrapper.innerHTML = '';
+            
+            fetch('https://dummyjson.com/posts', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                title: 'I am in love with someone.'
+            })
+            })
+            .then(res => res.json())
+            .then(res => {
+
+                res.posts.forEach(el => {
+                    let post = `
+                    <h2>${el.title}</h2>
+                    <p>${el.body}</p>
+                    `
+
+                    wrapper.innerHTML += post
+                });
+                
+
+                e.target.removeAttribute('disabled')
+                e.target.getElementsByTagName('i')[0].classList.add('hide')
+            })
+
+            
+
+        }
+    </script>
+    
+</body>
+</html>
