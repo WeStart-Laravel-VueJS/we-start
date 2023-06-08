@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="author" content="" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <title></title>
+
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .hide {
+            display: none;
+        }
+        .loading {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #ffffff;
+            z-index: 999;
+            transition: all .5s ease;
+        }
+
+        .loading.hide {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loading img {
+            width: 150px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="loading">
+        <img src="images/aef50a29f12e06db36021a71a8d7b6cc.gif" alt="">
+    </div>
+
+    <div class="container">
+
+        <br>
+        <br>
+
+        <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/9aIVmiL3Xks" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+        <div class="youtube-player" data-id="9aIVmiL3Xks"></div>
+
+
+        <iframe src="https://player.vimeo.com/video/825451178?h=c72f89bd57" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe> -->
+
+        <br>
+        <br>
+
+        <button class="loadbtn">Load Data <i class="fas fa-spinner fa-spin hide"></i></button>
+
+        <div class="product-wrapper">
+
+        </div>
+
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
