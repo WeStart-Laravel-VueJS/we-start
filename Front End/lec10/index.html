@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="author" content="" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <title></title>
+
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    
+    <div class="app1" v-cloak>
+        <!-- <button @click="increment()">Increment</button>
+        <p>{{ count }}</p>
+        <hr>
+
+        <h2>{{ product.title }}</h2>
+        <p>{{ product.price }}</p>
+
+        <div v-text="content"></div>
+        <div v-html="content"></div> -->
+        
+        <h2>Name {{ name }}</h2>
+        <button @click="show = !show">Show Data</button>
+        <!-- <h4>Age <span>{{ show ? age : 'Hidden' }}</span> </h4>
+        <h4>Password <span>{{ show ? password : 'Hidden' }}</span> </h4> -->
+
+        <h4 v-show="show">Age <span>{{ age }}</span> </h4>
+        <h4 v-show="show">Password <span>{{ password }}</span> </h4>
+
+        <ul>
+            <li v-for="(skill, index) in skills">{{ index + 1 }} - {{ skill }}</li>
+        </ul>
+
+        <h3>Your Marks</h3>
+        <ul>
+            <li v-for="(mark, key, index) in marks">
+                {{ index + ' - ' + key + ' : ' }}
+                <i>{{ mark > 90 ? mark + ' A+' : mark }}</i>
+            </li>
+        </ul>
+
+        <!-- <input v-bind:value="search" > -->
+        <!-- <input :value="search" @input="updateSearch($event)" > -->
+        <input v-model="search" >
+        <br>
+        <span>{{ search }}</span>
+        <!-- <span v-if="show">Show Data</span>
+        <span v-else-if=""></span>
+        <span v-else>Hide</span> -->
+
+        
+
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <!-- <script>alert(1)</script> -->
+
+    <!-- <div class="app2" v-cloak>
+        <button @click="count++">Increment</button>
+        <p>{{ count }}</p>
+    </div> -->
+
+    <!-- <button>Increment</button>
+    <p>1</p> -->
+
+    <!-- <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script> -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

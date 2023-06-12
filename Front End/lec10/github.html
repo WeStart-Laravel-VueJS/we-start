@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Github Users</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    
+
+    <div class="container">
+
+        <div class="wrapper">
+            <input type="text" v-model="username" @keyup.enter="searchUser">
+
+            <div class="result">
+                <img :src="image" alt="">
+                <div class="repos">
+                    <h2>{{ name }}</h2>
+                    <ul>
+                        <li v-for="repo in repos"><a target="_blank" :href="repo.html_url">{{ repo.full_name }}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="js/github.js"></script>
+</body>
+</html>
