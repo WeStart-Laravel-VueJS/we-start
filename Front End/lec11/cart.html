@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/cart.css">
+</head>
+<body>
+
+    <div class="app" v-cloak>
+        <div class="container">
+
+            <div class="wrapper">
+                <div class="product" v-for="(product, index) in products">
+                    <div class="product-image">
+                        <img :src="product.thumbnail" alt="">
+                        <div class="overlay">
+                            <a href="#"><i class="far fa-heart"></i></a>
+                            <a href="#"><i class="fas fa-chain"></i></a>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>{{ product.title }}</h3>
+                        <div class="product-price">
+                            <span class="price">
+                                ${{ product.price }}
+                            </span>
+                        </div>
+                        
+                        <div class="action">
+                            <input min="1" type="number" value="1" name="" onchange="this.value < 1 ? this.value = 1 : ''">
+                            <button @click="addToCart(index)">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+
+            <div class="cart-wrapper" v-if="carts.length > 0">
+                <table border="1">
+                    <tr>
+                        <th>ID</th>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Delete</th>
+                    </tr>
+                    <tr v-for="(cart, index) in carts">
+                        <td>{{ index + 1 }}</td>
+                        <td><img width="80" :src="cart.thumbnail" alt=""></td>
+                        <td>{{ cart.title }}</td>
+                        <td>{{ cart.price }}$</td>
+                        <td>{{ cart.quantity }}</td>
+                        <td>{{ cart.total }}$</td>
+                        <td><button @click="deleteCart(index)"><i class="fas fa-times"></i></button></td>
+                    </tr>
+                </table>
+            </div>
+    
+        </div>
+    
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="js/cart.js"></script>
+</body>
+</html>

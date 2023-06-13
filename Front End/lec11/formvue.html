@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="author" content="" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <title></title>
+
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="content" v-cloak>
+            <form action="" method="">
+                <input v-model="fname" type="text" placeholder="First Name">
+                <input v-model="lname" type="text" placeholder="Last Name">
+                <input :style="emailErr ? {'border-color': ' red'} : ''" v-model="email" type="email" placeholder="Email" />
+                <select v-model="education">
+                    <option value="Diploma">Diploma</option>
+                    <option value="Bachelor">Bachelor</option>
+                    <option value="Master">Master</option>
+                    <option value="pHD">pHD</option>
+                    <option value="Other">Other</option>
+                </select>
+                <input v-if="education == 'Other'" v-model="other" type="text" placeholder="Other">
+                <textarea :maxlength="bioLen" v-model="bio" rows="5" placeholder="Bio"></textarea>
+                <button>Send</button>
+            </form>
+
+            <hr>
+            {{ fullName }}
+            {{ fullName }}
+            {{ fullName }}
+            {{ fullName }}
+            {{ fullName }}
+            {{ fullName }}
+            {{ fullName }}
+            <hr>
+
+            <p>Name: {{ fname + ' ' + lname }} </p>
+            <p>Email: {{ email }} </p>
+            <p>Education: {{ education == 'Other' ? other : education }} </p>
+            <p>Bio: {{ bio }} </p>
+        </div>
+        
+    </div>
+    
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="js/formvue.js"></script>
+</body>
+</html>
