@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/cart.css">
+</head>
+<body>
+
+    <div class="app" v-cloak>
+        <div class="container">
+
+            <div class="wrapper">
+                <product v-for="(product, index) in products" :product="product" :index="index" @addcart="addProductToCart" />
+            </div>
+
+            <div class="cart-wrapper" v-if="carts.length > 0">
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tr v-for="(cart, index) in carts">
+                        <td>{{ index + 1 }}</td>
+                        <td><img width="80" :src="cart.thumbnail" alt=""></td>
+                        <td>{{ cart.title }}</td>
+                        <td>{{ cart.price }}$</td>
+                        <td>{{ cart.quantity }}</td>
+                        <td>{{ cart.quantity * cart.price }}$</td>
+                        <td><button @click="deleteCart(index)"><i class="fas fa-times"></i></button></td>
+                    </tr>
+                    <tr>
+                        <th colspan="5">Total</th>
+                        <th>{{ cartTotal }}$</th>
+                        <th><button class="remove" @click="carts = []">Remove All Cart</button></th>
+                    </tr>
+                </table>
+            </div>
+    
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="js/cart.js" type="module"></script>
+
+</body>
+</html>
