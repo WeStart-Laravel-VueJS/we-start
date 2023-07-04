@@ -1,6 +1,11 @@
 <?php 
 include 'header.php';
-var_dump($_POST);
+
+if(isset($_SESSION['user_id'])) {
+    header("Location: index.php");
+}
+
+
 if(isset($_POST['login'])) {
     $email = htmlspecialchars($_POST['email']);
     $password = sha1(htmlspecialchars($_POST['password']));
@@ -9,8 +14,11 @@ if(isset($_POST['login'])) {
     $result = mysqli_query($conn,$sql);
     if (mysqli_num_rows($result) == 1){
         $user = mysqli_fetch_assoc($result);
+        
+        $_SESSION['user_id'] = $user['id'];
 
         if($user['type'] == 'admin') {
+            $_SESSION['is_admin'] = true;
             header("Location: admin/index.php");
         }else {
             header("Location: index.php");
