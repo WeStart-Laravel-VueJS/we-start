@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\FirstController;
+use App\Http\Controllers\FormController;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
@@ -96,3 +97,7 @@ Route::get('home', [FirstController::class, 'home'])->name('first.home');
 Route::get('about', [FirstController::class, 'about'])->name('first.about');
 Route::get('contact', [FirstController::class, 'contact'])->name('first.contact');
 Route::post('contact', [FirstController::class, 'contactData']);
+
+
+Route::get('form1', [FormController::class, 'form1'])->name('forms.form1');
+Route::post('form1', [FormController::class, 'form1_data']);
