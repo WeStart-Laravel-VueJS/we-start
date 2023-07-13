@@ -44,10 +44,8 @@
                 </div>
             </nav>
 
-            @yield('content')
-
+            @section('content')
             {{-- @show('content') --}}
-
         </main>
         <!-- Footer-->
         <footer class="bg-white py-4 mt-auto">
