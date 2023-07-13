@@ -71,4 +71,47 @@ class FormController extends Controller
 
 
     }
+
+    function form2() {
+        return view('forms.form2');
+    }
+
+    function form2_data(Request $request) {
+
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'dob' => 'date',
+            'graduation' => 'date|after:dob',
+        ]);
+
+
+        dd($request->all());
+    }
+
+    function form3() {
+        return view('forms.form3');
+    }
+
+    function form3_data(Request $request) {
+
+        $request->validate([
+            'name' => 'required',
+            'image' => 'required|image',
+        ]);
+
+        // if(!file_exists('image')) {
+        //     mkdir('images');
+        // }
+
+        // dd($request->all());
+        // $imgname = $request->file('image')->getClientOriginalName();
+        // $imgname = str_replace(' ', '-', strtolower($imgname));
+        // $imgname = str_replace(' ', '-', strtolower($request->name)) . '-' . date('d-m-Y') . '-' . $imgname;
+        // $request->file('image')->move(public_path('images'), $imgname);
+
+        $path = $request->file('image')->storePublicly('images', 'new');
+
+        return view('forms.form3_image', compact('path'));
+    }
 }
