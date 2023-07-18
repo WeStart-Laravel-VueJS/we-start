@@ -12,17 +12,17 @@
 
     <div class="container my-5">
         <div class="d-flex align-items-center justify-content-between mb-4">
-            <h2>All Courses</h2>
+            <h2>Update Course</h2>
             <a class="btn btn-dark btn-sm" onclick="history.back()"><i class="fas fa-arrow-left"></i> Return Back</a>
-            {{-- <a class="btn btn-dark btn-sm" href="{{ route('courses.index') }}"><i class="fas fa-plus"></i> All Courses</a> --}}
         </div>
 
-        <form action="{{ route('courses.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('courses.update', $course->slug) }}" method="POST" enctype="multipart/form-data">
             @csrf
-
+            @method('put')
+            <input type="hidden" name="id" value="{{ $course->id }}">
             @include('courses._form')
 
-            <button class="btn btn-success px-5"><i class="fas fa-save"></i> Save</button>
+            <button class="btn btn-info px-5"><i class="fas fa-save"></i> Update</button>
         </form>
 
     </div>
