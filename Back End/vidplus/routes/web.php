@@ -15,4 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 // Route::delete('courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
 
+Route::get('courses/trash/{lang?}', [CourseController::class, 'trash'])->name('courses.trash');
+Route::get('courses/{course}/restore', [CourseController::class, 'restore'])->name('courses.restore')->withTrashed();
+Route::get('courses/{course}/forcedelete', [CourseController::class, 'forcedelete'])->name('courses.forcedelete')->withTrashed();
 Route::resource('courses', CourseController::class);

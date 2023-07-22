@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\App;
 use App\Http\Requests\CourseRequest;
-use App\Models\Course;
 use Illuminate\Support\Facades\File;
 
 class CourseController extends Controller
@@ -20,7 +21,9 @@ class CourseController extends Controller
 
         // $courses = DB::table('courses')->orderBy('id', 'DESC')->paginate(2);
         // $courses = DB::table('courses')->orderBy('id', 'DESC')->simplePaginate(10);
-        $courses = Course::orderBy('id', 'DESC')->simplePaginate(10);
+        // $courses = Course::orderBy('id', 'DESC')->simplePaginate(2);
+        // $courses = Course::orderBy('id', 'DESC')->hours(30)->paginate(2);
+        $courses = Course::orderBy('id', 'DESC')->paginate(2);
 
         // dd($courses);
 
@@ -59,7 +62,10 @@ class CourseController extends Controller
         // DB::table('courses')->insert($data);
         Course::create($data);
 
-        return redirect()->route('courses.index');
+        return redirect()
+        ->route('courses.index')
+        ->with('msg', 'Courses added successfully')
+        ->with('type', 'success');
 
     }
 
@@ -137,6 +143,40 @@ class CourseController extends Controller
             File::delete(public_path('images/'.$course->image));
         }
 
-        return redirect()->route('courses.index');
+        $course->delete();
+
+        // return redirect()->route('courses.index');
+
+        $courses = Course::orderBy('id', 'DESC')->paginate(2);
+        $courses_view = view('courses._table', compact('courses'))->render();
+
+        return response()->json([
+            'status' => true,
+            'msg'    =>'Successfully deleted Course!',
+            'courses' => $courses_view
+        ]);
+    }
+
+    function trash($lang = 'en') {
+        App::setlocale($lang);
+        $courses = Course::onlyTrashed()->orderBy('id', 'DESC')->paginate(2);
+
+        return view('courses.trash', compact('courses'));
+    }
+
+    function restore(Course $course) {
+        $course->restore();
+        return redirect()
+        ->route('courses.trash')
+        ->with('msg', 'Courses restored successfully')
+        ->with('type', 'success');
+    }
+
+    function forcedelete(Course $course) {
+        $course->forcedelete();
+        return redirect()
+        ->route('courses.trash')
+        ->with('msg', 'Courses deleted permanently successfully')
+        ->with('type', 'error');
     }
 }

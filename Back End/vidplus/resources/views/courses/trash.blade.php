@@ -1,26 +1,35 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>All Courses</title>
+    <title>All Trashed Courses</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
+
+    @if(app()->getLocale() == 'ar')
+    <style>
+        body {
+            direction: rtl;
+            text-align: right;
+        }
+
+    </style>
+    @endif
   </head>
   <body>
 
+    {{-- {{ app()->currentLocale() }} --}}
+    {{-- {{ app()->getLocale() }} --}}
+
     <div class="container my-5">
         <div class="d-flex align-items-center justify-content-between mb-4">
-            <h2>All Courses</h2>
+            <h2>{{ __('site.all_courses') }}</h2>
             <div>
-                <a class="btn btn-warning btn-sm" href="{{ route('courses.trash') }}"><i class="fas fa-trash"></i> Trashed Courses</a>
-                <a class="btn btn-dark btn-sm" href="{{ route('courses.create') }}"><i class="fas fa-plus"></i> Add New Course</a>
+                <a class="btn btn-warning btn-sm" href="{{ route('courses.index') }}"><i class="fas fa-heart"></i> {{ __('site.all_courses') }}</a>
             </div>
         </div>
-        {{-- @dump($courses->perPage())
-        @dump($courses->currentPage())
-        @dump($courses) --}}
         <div class="course-wrapper">
             @include('courses._table')
         </div>
