@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Lang;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Course extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, Lang;
 
     // protected $fillable = ['name', 'slug', 'image', 'instructor', 'hours', 'content'];
     protected $guarded = [];

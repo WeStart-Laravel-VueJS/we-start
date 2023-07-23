@@ -23,7 +23,27 @@
     {{-- {{ app()->currentLocale() }} --}}
     {{-- {{ app()->getLocale() }} --}}
 
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Select Language
+        </button>
+        <ul class="dropdown-menu">
+            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                <li><a class="dropdown-item" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                    <img width="20" src="{{ asset('images/'.$properties["flag"].'.png') }}" alt="">
+                    {{ $properties['native'] }}</a></li>
+            @endforeach
+        </ul>
+      </div>
+
     <div class="container my-5">
+        {{-- <select onchange="window.location.href = this.value">
+            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                <option value="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                    {{ $properties['native'] }}
+                </option>
+            @endforeach
+        </select> --}}
         <div class="d-flex align-items-center justify-content-between mb-4">
             <h2>{{ __('site.all_courses') }}</h2>
             <div>

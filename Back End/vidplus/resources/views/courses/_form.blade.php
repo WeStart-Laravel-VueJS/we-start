@@ -1,10 +1,29 @@
 
-<div class="mb-3">
-    <label>Name</label>
-    <input type="text" placeholder="Name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $course->name??'') }}" />
-    @error('name')
-        <small class="invalid-feedback">{{ $message }}</small>
-    @enderror
+<div class="row">
+    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+    @php
+        $name = 'name_'.$localeCode;
+    @endphp
+    <div class="col-md-6">
+        <div class="mb-3">
+            <label>{{ __('site.'.$name) }}</label>
+            <input type="text" placeholder="{{ __('site.'.$name) }}" class="form-control @error($name) is-invalid @enderror" name="{{ $name }}" value="{{ old($name, $course->$name??'') }}" />
+            @error($name)
+                <small class="invalid-feedback">{{ $message }}</small>
+            @enderror
+        </div>
+    </div>
+    @endforeach
+
+    {{-- <div class="col-md-6">
+        <div class="mb-3">
+            <label>Name</label>
+            <input type="text" placeholder="Name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $course->name??'') }}" />
+            @error('name')
+                <small class="invalid-feedback">{{ $message }}</small>
+            @enderror
+        </div>
+    </div> --}}
 </div>
 
 <div class="mb-3">

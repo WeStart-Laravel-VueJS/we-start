@@ -22,14 +22,17 @@ class CourseRequest extends FormRequest
     public function rules(): array
     {
         // dd($this->method());
-        $val = 'required|unique:courses,name';
+        $name_en = 'required|unique:courses,name_en';
+        $name_ar = 'required|unique:courses,name_ar';
         $img = 'required|image|mimes:png,jpg,jpeg';
         if($this->method() == 'PUT') {
-            $val = 'required|unique:courses,name,'.$this->id;
+            $name_en = 'required|unique:courses,name_en,'.$this->id;
+            $name_ar = 'required|unique:courses,name_ar,'.$this->id;
             $img = 'nullable|image|mimes:png,jpg,jpeg';
         }
         return [
-            'name' => $val,
+            'name_en' => $name_en,
+            'name_ar' => $name_ar,
             'image' => $img,
             'instructor' => '',
             'hours' => 'required',

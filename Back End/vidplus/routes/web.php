@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\CourseController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CourseController;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 
 // Route::get('courses', [CourseController::class, 'index'])->name('courses.index');
@@ -15,7 +17,16 @@ use Illuminate\Support\Facades\Route;
 
 // Route::delete('courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
 
-Route::get('courses/trash/{lang?}', [CourseController::class, 'trash'])->name('courses.trash');
-Route::get('courses/{course}/restore', [CourseController::class, 'restore'])->name('courses.restore')->withTrashed();
-Route::get('courses/{course}/forcedelete', [CourseController::class, 'forcedelete'])->name('courses.forcedelete')->withTrashed();
-Route::resource('courses', CourseController::class);
+// Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
+
+Route::prefix(LaravelLocalization::setLocale())->group(function() {
+
+    Route::get('courses/trash', [CourseController::class, 'trash'])->name('courses.trash');
+    Route::get('courses/{course}/restore', [CourseController::class, 'restore'])->name('courses.restore')->withTrashed();
+    Route::get('courses/{course}/forcedelete', [CourseController::class, 'forcedelete'])->name('courses.forcedelete')->withTrashed();
+    Route::resource('courses', CourseController::class);
+
+
+    Route::get('contact-us', [ContactController::class, 'contact_us'])->name('contact_us');
+    Route::post('contact-us', [ContactController::class, 'contact_us_data']);
+});

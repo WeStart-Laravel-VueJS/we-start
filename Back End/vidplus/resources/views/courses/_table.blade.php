@@ -20,7 +20,9 @@
     @foreach ($courses as $course)
     <tr id="row_{{ $course->id }}">
         <td>{{ $i++ }}</td>
-        <td>{{ $course->name }}</td>
+        {{-- <td>{{ $course->{"name_".app()->currentLocale()} }}</td> --}}
+        {{-- <td>{{ json_decode($course->name, true)[app()->currentLocale()]??'' }}</td> --}}
+        <td>{{ $course->trans_name }}</td>
         <td>
             <img width="50" src="{{ $course->image }}" alt="">
         </td>

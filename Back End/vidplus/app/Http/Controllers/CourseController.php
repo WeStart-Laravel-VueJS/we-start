@@ -47,7 +47,9 @@ class CourseController extends Controller
         $data = $request->validated();
 
         unset($data['image']);
-        $data['slug'] = Str::slug($request->name);
+        unset($data['name_en']);
+        unset($data['name_ar']);
+        $data['slug'] = Str::slug($request->name_en);
         $data['created_at'] = now();
 
         if($request->hasFile('image')) {
@@ -58,6 +60,10 @@ class CourseController extends Controller
             $data['image'] = $newname;
         }
 
+        $data['name'] = json_encode([
+            'en' => $request->name_en,
+            'ar' => $request->name_ar,
+        ]);
         // dd($data);
         // DB::table('courses')->insert($data);
         Course::create($data);
@@ -157,8 +163,7 @@ class CourseController extends Controller
         ]);
     }
 
-    function trash($lang = 'en') {
-        App::setlocale($lang);
+    function trash() {
         $courses = Course::onlyTrashed()->orderBy('id', 'DESC')->paginate(2);
 
         return view('courses.trash', compact('courses'));
