@@ -18,6 +18,11 @@
 
         <hr>
 
+        @foreach($post->images as $img)
+        <img src="{{ asset($img->path) }}" alt="">
+        @endforeach
+        <hr>
+
         <div class="commentns">
             <h3>All Comments ({{ $post->comments_count }})</h3>
 

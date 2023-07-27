@@ -16,6 +16,17 @@ class Post extends Model
     }
 
     function tags() {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tag::class, 'my_post_tag');
     }
+
+    function images() {
+        return $this->morphMany(Image::class, 'imageable');
+    }
+
+    // protected static function booted(): void
+    // {
+    //     static::created(function (Post $post) {
+    //         dd("Post " . $post->title . " created");
+    //     });
+    // }
 }

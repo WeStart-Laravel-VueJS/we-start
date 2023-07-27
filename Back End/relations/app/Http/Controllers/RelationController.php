@@ -6,6 +6,7 @@ use App\Helpers\General;
 use App\Models\Comment;
 use App\Models\Country;
 use App\Models\Post;
+use App\Models\Product;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
@@ -87,6 +88,25 @@ class RelationController extends Controller
         // $post->tags()->sync();
         // $post->tags()->toggle();
 
+        // upload images
+        // $product = Product::create([
+        //     'name' => 'eeee',
+        //     'price' => 100
+        // ]);
+        $images = explode(',', $request->images);
+        foreach($images as $img) {
+            $post->images()->create([
+                'path' => $img
+            ]);
+        }
+
+
         return redirect('/posts');
+    }
+
+    function upload_image(Request $request) {
+        $path = $request->file('file')->store('images', 'mn');
+
+        return $path;
     }
 }
