@@ -7,16 +7,19 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class InvoiceNotification extends Notification implements ShouldQueue
+// class InvoiceNotification extends Notification implements ShouldQueue
+class InvoiceNotification extends Notification
 {
     use Queueable;
+
+    public $data;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct($data)
     {
-        //
+        $this->data = $data;
     }
 
     /**
@@ -26,7 +29,10 @@ class InvoiceNotification extends Notification implements ShouldQueue
      */
     public function via(object $notifiable): array
     {
-        return ['mail'];
+        $channel = explode(',', $notifiable->channel);
+        // // dd($channel);
+        return $channel;
+        // return ['broadcast'];
     }
 
     /**
@@ -38,6 +44,19 @@ class InvoiceNotification extends Notification implements ShouldQueue
                     ->line('The introduction to the notification.')
                     ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
+    }
+
+    public function toDatabase(object $notifiable) {
+        return [
+            'msg' => 'The product ' . $this->data['product'] . ' purchased by the ' . $this->data['user'] . ' with total price = $' . $this->data['price']
+        ];
+    }
+
+    public function toBroadcast(object $notifiable) {
+        // $notifiable->id = 1;
+        return [
+            'msg' => 'The product ' . $this->data['product'] . ' purchased by the ' . $this->data['user'] . ' with total price = $' . $this->data['price']
+        ];
     }
 
     /**

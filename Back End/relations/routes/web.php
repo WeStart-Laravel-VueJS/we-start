@@ -17,3 +17,5 @@ Route::post('/upload_image', [RelationController::class, 'upload_image'])->name(
 
 
 Route::get('/send-notification', [NotificationController::class, 'send_notification']);
+Route::get('/all-notification', [NotificationController::class, 'all_notification']);
+Route::get('/read-notification/{id}', [NotificationController::class, 'read_notification'])->name('read_notification');

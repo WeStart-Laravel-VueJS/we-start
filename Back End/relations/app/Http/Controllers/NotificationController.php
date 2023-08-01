@@ -15,10 +15,32 @@ class NotificationController extends Controller
         // $admins = User::whereType('admin')->get();
         // Notification::send($admins, new InvoiceNotification);
 
-        Artisan::call("queue:work");
+        $data = [
+            'user' => 'Mohammed Naji',
+            'product' => 'iPhone',
+            'price' => 1000
+        ];
+
+        // Artisan::call("queue:work");
         $user = User::find(1);
-        $user->notify(new InvoiceNotification());
-        Artisan::call("queue:stop");
+        $user->notify(new InvoiceNotification($data));
+        // Artisan::call("queue:stop");
         // dd($admins);
+    }
+
+    function all_notification() {
+        $user = User::find(1);
+
+        return view('all_notification', compact('user'));
+    }
+
+    function read_notification($id) {
+        $user = User::find(1);
+        $user->notifications()->find($id)->markAsRead();
+
+        return [
+            'msg' => 'Done'
+        ];
+        // return redirect()->back();
     }
 }
