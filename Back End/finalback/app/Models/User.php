@@ -44,4 +44,44 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    function services() {
+        return $this->hasMany(Service::class);
+    }
+
+    function image() {
+        return $this->morphOne(Image::class, 'imageable');
+    }
+
+    function promocodes() {
+        return $this->hasMany(Promocode::class);
+    }
+
+    function reviews() {
+        return $this->hasMany(Review::class);
+    }
+
+    function reports() {
+        return $this->hasMany(Report::class);
+    }
+
+    function carts() {
+        return $this->hasMany(Cart::class);
+    }
+
+    function wishlists() {
+        return $this->hasMany(Wishlist::class);
+    }
+
+    function orders() {
+        return $this->hasMany(Order::class);
+    }
+
+    function order_details() {
+        return $this->hasMany(OrderDetail::class);
+    }
+
+    function payments() {
+        return $this->hasMany(Payment::class);
+    }
 }

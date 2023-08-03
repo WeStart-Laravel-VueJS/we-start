@@ -15,7 +15,6 @@ return new class extends Migration
             $table->foreignId('service_id');
             $table->foreignId('tag_id');
 
-
             $table->primary(['service_id', 'tag_id']);
         });
     }

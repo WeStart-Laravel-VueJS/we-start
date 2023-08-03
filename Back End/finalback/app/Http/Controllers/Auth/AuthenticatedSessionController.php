@@ -12,12 +12,18 @@ use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
 {
+    // [User].blade.php
     /**
      * Display the login view.
      */
     public function create(): View
     {
         return view('auth.login');
+    }
+
+    public function create_admin(): View
+    {
+        return view('auth.login_admin');
     }
 
     /**

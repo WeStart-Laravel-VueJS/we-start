@@ -5,6 +5,7 @@
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
+        <input type="hidden" name="guard" value="web">
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
