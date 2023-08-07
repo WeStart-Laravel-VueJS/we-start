@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('icon');
             $table->text('description')->nullable();
-            $table->foreignId('parent_id')->nullable();
+            $table->foreignId('parent_id')->nullable()->constrained('categories', 'id')->nullOnDelete();
             $table->timestamps();
         });
     }

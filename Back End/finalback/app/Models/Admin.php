@@ -25,4 +25,15 @@ class Admin extends Authenticatable implements MustVerifyEmail
     function reports() {
         return $this->hasMany(Report::class);
     }
+
+    function image() {
+        return $this->morphOne(Image::class, 'imageable');
+    }
+
+    function getPicAttribute() {
+        if($this->image) {
+            return $this->image->path;
+        }
+        return 'https://ui-avatars.com/api/?background=random&name='.$this->name;
+    }
 }
