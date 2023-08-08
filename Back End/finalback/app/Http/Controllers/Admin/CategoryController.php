@@ -7,17 +7,44 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
+use DataTables;
 
 class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $categories = Category::withCount('services')->latest('id')->paginate(10);
 
         return view('admin.categories.index', compact('categories'));
+
+        // if ($request->ajax()) {
+        //     $data = Category::select('*');
+        //     return Datatables::of($data)
+        //             ->addIndexColumn()
+        //             ->addColumn('name', function($row){
+        //                     return $row->name_trans;
+        //             })
+        //             ->addColumn('image', function($row){
+
+        //                     $url = asset($row->image->path);
+        //                     $img = "<img width='60' src='$url' alt=''>";
+
+        //                     return $img;
+        //             })
+        //             ->addColumn('action', function($row){
+
+        //                     $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
+
+        //                     return $btn;
+        //             })
+        //             ->rawColumns(['action', 'image', 'name'])
+        //             ->make(true);
+        // }
+
+        // return view('admin.categories.index');
     }
 
     /**

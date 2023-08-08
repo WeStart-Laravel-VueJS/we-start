@@ -25,6 +25,6 @@ class Category extends Model
     }
 
     function image() {
-        return $this->morphOne(Image::class, 'imageable');
+        return $this->morphOne(Image::class, 'imageable')->withDefault();
     }
 }
