@@ -21,8 +21,15 @@ const blog = ref({
 onMounted(() => {
     axios.get(`/api/blogs/${route.params.id}`)
     .then(res => {
-        blog.value = res.data.data;
-        blog.value._method = 'put'
+        // console.log(res.data.data.id);
+        if(res.data.data.id) {
+            blog.value = res.data.data;
+            blog.value._method = 'put'
+        }else {
+            router.push('/not-found')
+            // router.push({name: 'create_blog'})
+        }
+
     })
     // console.log(route.params.id);
     // console.log(props.id);
@@ -47,7 +54,7 @@ const handleFileChange = (event) => {
 </script>
 
 <template>
-    <div class="p-5">
+    <div class="p-5" v-if="blog.id">
         <h1>Blog Edit</h1>
         <form @submit.prevent="updateData()">
             <div class="mb-3">

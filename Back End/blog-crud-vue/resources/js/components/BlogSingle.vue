@@ -24,7 +24,7 @@ onMounted(async () => {
         <h1>{{ blog.title }}</h1>
         <img :src="'/images/'+blog.image" alt="">
         <div v-html="blog.body"></div>
-        
+
     </div>
 </template>
 
