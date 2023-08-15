@@ -21,7 +21,10 @@ class CategoryResource extends JsonResource
         }
 
         return [
+            'id' => $this->id,
             'name' => $this->{'name_'.$lang},
+            'image' => asset($this->image->path),
+            'services' => ServiceResource::collection($this->services),
             'link' => url('/api/v1/category/'. $this->slug)
         ];
     }

@@ -23,6 +23,10 @@ class Service extends Model
         return $this->morphMany(Image::class, 'imageable');
     }
 
+    function image() {
+        return $this->morphOne(Image::class, 'imageable')->where('type', 'cover');
+    }
+
     function promocodes() {
         return $this->belongsToMany(Promocode::class);
     }

@@ -48,4 +48,17 @@ class CategoryController extends Controller
     {
         //
     }
+
+    public function getMainCategories(Request $request)
+    {
+        if ($request->has('limit')) {
+            return CategoryResource::collection(Category::limit($request->limit)->get());
+        }
+
+        if($request->has('search')) {
+
+        }
+
+        return CategoryResource::collection(Category::paginate(10));
+    }
 }
