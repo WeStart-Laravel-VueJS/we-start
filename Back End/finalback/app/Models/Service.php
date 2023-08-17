@@ -20,7 +20,7 @@ class Service extends Model
     }
 
     function images() {
-        return $this->morphMany(Image::class, 'imageable');
+        return $this->morphMany(Image::class, 'imageable')->where('type', 'gallery');
     }
 
     function image() {
@@ -53,5 +53,23 @@ class Service extends Model
 
     function order_details() {
         return $this->hasMany(OrderDetail::class);
+    }
+
+    function setNameAttribute(){
+        $name = json_encode([
+            'en' => request()->name_en,
+            'ar' => request()->name_ar,
+        ], JSON_UNESCAPED_UNICODE);
+
+        $this->attributes['name'] = $name;
+    }
+
+    function setDescriptionAttribute(){
+        $description = json_encode([
+            'en' => request()->description_en,
+            'ar' => request()->description_ar,
+        ], JSON_UNESCAPED_UNICODE);
+
+        $this->attributes['description'] = $description;
     }
 }

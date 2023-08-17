@@ -1,11 +1,5 @@
 <script setup>
 import { onMounted } from 'vue';
-import { useUserStore } from '../stores/user';
-const user_store = useUserStore();
-
-onMounted(() => {
-    console.log(user_store.user.value);
-})
 </script>
 
 <template>

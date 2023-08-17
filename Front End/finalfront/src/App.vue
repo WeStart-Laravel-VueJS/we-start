@@ -1,4 +1,12 @@
 <script setup>
+import { onMounted } from 'vue';
+import { useUserStore } from './stores/user';
+const user_store = useUserStore();
+
+const logout = () => user_store.logout();
+// onMounted(() => {
+//     console.log(user_store.user.value);
+// })
 </script>
 
 <template>
@@ -98,7 +106,9 @@
                     <router-link to="/about-us" class="text-gray-200 hover:text-white transition">About us</router-link>
                     <router-link to="/contact-us" class="text-gray-200 hover:text-white transition">Contact us</router-link>
                 </div>
-                <router-link to="/login" class="text-gray-200 hover:text-white transition">Login</router-link>
+
+                <router-link v-if="!user_store.user.value" to="/login" class="text-gray-200 hover:text-white transition">Login</router-link>
+                <span v-else class="text-gray-200 hover:text-white transition cursor-pointer" @click="logout">Logout</span>
             </div>
         </div>
     </nav>

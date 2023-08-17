@@ -1,24 +1,19 @@
 <script setup>
-import { onMounted } from 'vue';
-import { useUserStore } from '../stores/user';
 
-// import { useRouter } from 'vue-router';
-// const router = useRouter()
+import { onMounted } from 'vue';
+import { useRoute } from 'vue-router';
+const route = useRoute();
+import { useUserStore } from '../stores/user';
 
 const user_store = useUserStore()
 const user = useUserStore().user.value.user
 
 
 onMounted(() => {
-    console.log(user);
+
+    console.log(route.params.id);
+
 })
-
-// const logout = () => {
-//     user_store.user.value = null
-//     router.push('/login')
-// }
-
-const logout = () => user_store.logout()
 
 </script>
 
@@ -32,7 +27,7 @@ const logout = () => user_store.logout()
             <span class="text-sm text-gray-400">
                 <i class="fa-solid fa-chevron-right"></i>
             </span>
-            <p class="text-gray-600 font-medium">Account</p>
+            <p class="text-gray-600 font-medium">My Services</p>
         </div>
         <!-- ./breadcrumb -->
 
@@ -133,45 +128,42 @@ const logout = () => user_store.logout()
             <!-- ./sidebar -->
 
             <!-- info -->
-            <div class="col-span-9 grid grid-cols-3 gap-4">
-
-                <div class="shadow rounded bg-white px-4 pt-6 pb-8">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="font-medium text-gray-800 text-lg">Personal Profile</h3>
-                        <a href="#" class="text-primary">Edit</a>
+            <div class="table col-span-9 gap-4">
+                name
+price
+description
+discount
+discount_type
+category_id
+                <form @submit.prevent="login" action="#" method="post" autocomplete="off">
+                    <div class="space-y-2">
+                        <div>
+                            <label for="email" class="text-gray-600 mb-2 block">English Name</label>
+                            <input type="email" name="email" id="email"
+                                class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
+                                placeholder="youremail.@domain.com">
+                            <!-- <small v-if="errors.email" class="text-red-600">{{ errors.email[0] }}</small> -->
+                        </div>
+                        <div>
+                            <label for="password" class="text-gray-600 mb-2 block">Password</label>
+                            <input type="password" name="password" id="password"
+                                class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
+                                placeholder="*******">
+                        </div>
                     </div>
-                    <div class="space-y-1">
-                        <h4 class="text-gray-700 font-medium">{{ user.name }}</h4>
-                        <p class="text-gray-800">{{ user.email }}</p>
-                        <p class="text-gray-800">{{ user.phone }}</p>
+                    <div class="flex items-center justify-between mt-6">
+                        <div class="flex items-center">
+                            <input type="checkbox" name="remember" id="remember"
+                                class="text-primary focus:ring-0 rounded-sm cursor-pointer">
+                            <label for="remember" class="text-gray-600 ml-3 cursor-pointer">Remember me</label>
+                        </div>
+                        <a href="#" class="text-primary">Forgot password</a>
                     </div>
-                </div>
-
-                <div class="shadow rounded bg-white px-4 pt-6 pb-8">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="font-medium text-gray-800 text-lg">Shipping address</h3>
-                        <a href="#" class="text-primary">Edit</a>
+                    <div class="mt-4">
+                        <button type="submit"
+                            class="block w-full py-2 text-center text-white bg-primary border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium">Login</button>
                     </div>
-                    <div class="space-y-1">
-                        <h4 class="text-gray-700 font-medium">{{ user.name }}</h4>
-                        <p class="text-gray-800">{{ user.address }}</p>
-                        <p class="text-gray-800">{{ user.address }}</p>
-                        <p class="text-gray-800">{{ user.phone }}</p>
-                    </div>
-                </div>
-
-                <div class="shadow rounded bg-white px-4 pt-6 pb-8">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="font-medium text-gray-800 text-lg">Payment Information</h3>
-                        <a href="#" class="text-primary">Edit</a>
-                    </div>
-                    <div class="space-y-1">
-                        <h4 class="text-gray-700 font-medium">Revenue</h4>
-                        <p class="text-gray-800">${{ user.revenue }}</p>
-                        <h4 class="text-gray-700 font-medium">Points</h4>
-                        <p class="text-gray-800">{{ user.points }}</p>
-                    </div>
-                </div>
+                </form>
 
             </div>
             <!-- ./info -->
@@ -182,4 +174,5 @@ const logout = () => user_store.logout()
 </template>
 
 <style lang="scss" scoped>
+
 </style>

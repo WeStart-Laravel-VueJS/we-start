@@ -186,10 +186,10 @@
 
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="index.html">All Advertisements</a>
+                                    <a href="{{ route('admin.advertisements.index') }}">All Advertisements</a>
                                 </li>
                                 <li>
-                                    <a href="index2.html">Add New</a>
+                                    <a href="{{ route('admin.advertisements.create') }}">Add New</a>
                                 </li>
                             </ul>
                         </li>
@@ -203,28 +203,25 @@
 
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="index.html">All Roles</a>
+                                    <a href="{{ route('admin.roles.index') }}">All Roles</a>
                                 </li>
                                 <li>
-                                    <a href="index2.html">Add New</a>
-                                </li>
-                                <li>
-                                    <a href="index2.html">Permissions</a>
+                                    <a href="{{ route('admin.roles.create') }}">Add New</a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="{{ route('admin.dashboard') }}">
+                            <a href="{{ route('admin.services') }}">
                                 <i class="fas fa-heart"></i>Services</a>
                         </li>
 
                         <li>
-                            <a href="{{ route('admin.dashboard') }}">
+                            <a href="{{ route('admin.reports') }}">
                                 <i class="fas fa-file"></i>Reports</a>
                         </li>
 
                         <li>
-                            <a href="{{ route('admin.dashboard') }}">
+                            <a href="{{ route('admin.payments') }}">
                                 <i class="fas fa-dollar"></i>Payments</a>
                         </li>
 
@@ -372,6 +369,7 @@
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
+
                         @yield('content')
                     </div>
                 </div>

@@ -29,7 +29,10 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: () => import('../views/LoginView.vue')
+      component: () => import('../views/LoginView.vue'),
+      meta: {
+        Guest: true
+      }
     },
     {
       path: '/register',
@@ -40,6 +43,22 @@ const router = createRouter({
       path: '/account',
       name: 'account',
       component: () => import('../views/AccountView.vue'),
+      meta: {
+        Auth: true
+      }
+    },
+    {
+      path: '/my-services',
+      name: 'my_services',
+      component: () => import('../views/MyServicesView.vue'),
+      meta: {
+        Auth: true
+      }
+    },
+    {
+      path: '/user/services/:id?',
+      name: 'user_service',
+      component: () => import('../views/UserServiceView.vue'),
       meta: {
         Auth: true
       }
@@ -66,6 +85,13 @@ router.beforeEach(to => {
     const user_store = useUserStore();
     if(!user_store.user.value) {
       router.push('/login');
+    }
+  }
+
+  if(to.meta.Guest) {
+    const user_store = useUserStore();
+    if(user_store.user.value) {
+      router.push('/');
     }
   }
 })

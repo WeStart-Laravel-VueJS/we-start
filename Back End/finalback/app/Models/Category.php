@@ -27,4 +27,6 @@ class Category extends Model
     function image() {
         return $this->morphOne(Image::class, 'imageable')->withDefault();
     }
+
+    protected $appends = ['name_trans'];
 }

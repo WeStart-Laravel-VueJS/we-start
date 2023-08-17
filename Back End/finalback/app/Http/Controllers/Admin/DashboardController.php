@@ -4,9 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Mail\ReplyMail;
+use App\Models\Payment;
+use App\Models\Report;
+use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class DashboardController extends Controller
 {
@@ -79,5 +84,41 @@ class DashboardController extends Controller
         ]);
 
         return redirect()->back()->with('msg', 'Settings saved');
+    }
+
+    function services() {
+        $services = Service::with('category', 'user', 'image')->latest('id')->paginate(10);
+        return view('admin.services', compact('services'));
+    }
+
+    function reports() {
+        $reports = Report::with('user', 'service')->latest('id')->paginate(10);
+        return view('admin.reports', compact('reports'));
+    }
+
+    function reports_replay(Request $request, $id) {
+
+        $request->validate([
+            'reply' => 'required'
+        ]);
+
+        $report = Report::find($id);
+
+        Mail::to($report->user->email)->queue(new ReplyMail($request->reply, $report->user->name));
+
+        $report->update([
+            'status' => '1',
+            'reply' => $request->reply,
+            'admin_id' => Auth::id()
+        ]);
+
+        return redirect()->back();
+
+    }
+
+    function payments() {
+        $payments = Payment::with('user')->latest('id')->paginate(10);
+
+        return view('admin.payments', compact('payments'));
     }
 }

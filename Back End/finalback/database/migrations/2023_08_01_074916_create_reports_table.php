@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreignId('service_id');
             $table->text('comment');
             $table->enum('status', [0, 1])->default(0);
-            $table->text('replay')->nullable();
-            $table->foreignId('admin_id');
+            $table->text('reply')->nullable();
+            $table->foreignId('admin_id')->nullable();
             $table->timestamps();
         });
     }
