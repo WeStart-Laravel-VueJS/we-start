@@ -56,12 +56,34 @@ const router = createRouter({
       }
     },
     {
+      path: '/my-wishlist',
+      name: 'my_wishlist',
+      component: () => import('../views/MyWishlistView.vue'),
+      meta: {
+        Auth: true
+      }
+    },
+    {
+      path: '/my-orders',
+      name: 'my_orders',
+      component: () => import('../views/MyOrdersView.vue'),
+      meta: {
+        Auth: true
+      }
+    },
+    {
       path: '/user/services/:id?',
       name: 'user_service',
       component: () => import('../views/UserServiceView.vue'),
       meta: {
         Auth: true
       }
+    },
+    {
+      path: '/category/:slug',
+      name: 'show_category',
+      component: () => import('../views/ShowCategoryView.vue'),
+      props: true
     },
     {
       path: '/:path(.*)',

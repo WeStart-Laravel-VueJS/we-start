@@ -6,17 +6,15 @@ import Sidebar from '../components/Sidebar.vue';
 const user_store = useUserStore()
 const user = useUserStore().user.value.user
 
-const myservices = ref([])
+const mywishlist = ref([])
 
 onMounted(() => {
-    // console.log(user_store.user.value.token);
-    // send axios to server to get user services
     let config = {
         headers: {'Authorization': `Bearer ${user_store.user.value.token}`},
     }
     axios.get('/user/services', config)
     .then(res => {
-        myservices.value = res.data.data
+        mywishlist.value = res.data.data
     })
 })
 
@@ -34,7 +32,7 @@ const logout = () => user_store.logout()
             <span class="text-sm text-gray-400">
                 <i class="fa-solid fa-chevron-right"></i>
             </span>
-            <p class="text-gray-600 font-medium">My Services</p>
+            <p class="text-gray-600 font-medium">My Wishlist</p>
         </div>
         <!-- ./breadcrumb -->
 
@@ -45,8 +43,6 @@ const logout = () => user_store.logout()
 
             <!-- info -->
             <div class="table col-span-9 gap-4">
-
-                <router-link class="bg-primary text-white p-2 inline-block mb-4 px-5 hover:bg-red-400 transition-all" to="/user/services">Add new Service</router-link>
 
                 <table class="min-w-full shadow leading-normal">
                     <thead>
@@ -62,9 +58,9 @@ const logout = () => user_store.logout()
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="service in myservices" :key="service.id">
+                        <tr v-for="service in mywishlist" :key="service.id">
                             <td>{{ service.id }}</td>
-                            <td>{{ service.name }}</td>
+                            <td>{{ service.name_trans }}</td>
                             <td><img width="80" :src="service.image" alt=""></td>
                             <td>{{ service.price }}</td>
                             <td>{{ service.discount }} - {{ service.discount_type }}</td>
