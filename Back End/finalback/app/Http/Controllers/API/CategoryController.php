@@ -51,14 +51,24 @@ class CategoryController extends Controller
 
     public function getMainCategories(Request $request)
     {
+        $category = Category::query();
+        // return $request->all();
         if ($request->has('limit')) {
-            return CategoryResource::collection(Category::limit($request->limit)->get());
+            $category->take($request->limit);
+            // return CategoryResource::collection(Category::limit($request->limit)->get());
         }
 
         if($request->has('search')) {
-
+            $category->where('name', 'like', '%'.$request->search.'%');
+            // return CategoryResource::collection(Category::where('name', 'like', '%'.$request->search.'%')->get());
         }
 
-        return CategoryResource::collection(Category::paginate(10));
+        // return $category->get();
+
+        return CategoryResource::collection($category->get());
+    }
+
+    function single(Category $category) {
+        return new CategoryResource($category);
     }
 }

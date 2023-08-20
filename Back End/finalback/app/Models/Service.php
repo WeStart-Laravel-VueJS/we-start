@@ -2,14 +2,17 @@
 
 namespace App\Models;
 
+use App\Traits\Trans;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Service extends Model
 {
-    use HasFactory;
+    use HasFactory, Trans;
 
     protected $guarded = [];
+
+    protected $appends = ['name_trans'];
 
     function category() {
         return $this->belongsTo(Category::class)->withDefault();

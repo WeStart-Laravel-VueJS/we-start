@@ -27,6 +27,7 @@ class ServiceResource extends JsonResource
             "status" => $this->status,
             "category" => $this->category,
             "user" => $this->user,
+            "name_trans" => $this->name_trans
         ];
     }
 }

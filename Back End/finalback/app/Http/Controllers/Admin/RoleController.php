@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Role;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Permission;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class RoleController extends Controller
 {
@@ -97,8 +98,9 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        $role->permissions()->delete();
+        // $role->permissions()->delete();
         $role->delete();
+        DB::table('role_permission')->where('role_id', $role->id)->delete();
 
         return redirect()
         ->route('admin.roles.index')

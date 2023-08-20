@@ -20,10 +20,16 @@ class CategoryResource extends JsonResource
             $lang = 'en';
         }
 
+        $path = asset('images/no-image-available.png');
+        if($this->image->path && file_exists(public_path($this->image->path))) {
+            $path = asset($this->image->path);
+        }
+
         return [
             'id' => $this->id,
             'name' => $this->{'name_'.$lang},
-            'image' => asset($this->image->path),
+            'slug' => $this->slug,
+            'image' => $path,
             'services' => ServiceResource::collection($this->services),
             'link' => url('/api/v1/category/'. $this->slug)
         ];
