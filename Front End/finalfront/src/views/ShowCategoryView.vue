@@ -22,6 +22,9 @@ onMounted(() => {
     })
 })
 
+const final_price = (service) => {
+    return service.discount_type == 'fixed' ? service.price - service.discount : service.price - (service.price * (service.discount / 100)) 
+}
 </script>
 
 
@@ -38,7 +41,7 @@ onMounted(() => {
             <div class="grid grid-cols-4 gap-6">
                 <div v-for="service in category.services" :key="service.id" class="bg-white shadow rounded overflow-hidden group">
                     <div class="relative">
-                        <img src="../assets/images/products/product1.jpg" alt="product 1" class="w-full">
+                        <img :src="service.image" alt="product 1" class="w-full img-category">
                         <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center 
                         justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
                             <a href="#"
@@ -54,13 +57,20 @@ onMounted(() => {
                         </div>
                     </div>
                     <div class="pt-4 pb-3 px-4">
-                        <a href="#">
-                            <h4 class="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition">Guyer
-                                Chair</h4>
-                        </a>
+                        <router-link :to="'/service/'+service.slug">
+                            <h4 class="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition">{{ service.name_trans }}</h4>
+                        </router-link>
                         <div class="flex items-baseline mb-1 space-x-2">
-                            <p class="text-xl text-primary font-semibold">$45.00</p>
-                            <p class="text-sm text-gray-400 line-through">$55.90</p>
+                            <template v-if="service.discount">
+                                <p class="text-xl text-primary font-semibold">${{ final_price(service) }}</p>
+                                <p class="text-sm text-gray-400 line-through">$
+                                    {{ service.price }}
+                                </p>
+                            </template>
+                            <template v-else>
+                                <p class="text-xl text-primary font-semibold">${{ service.price }}</p>
+                            </template>
+                            
                         </div>
                         <div class="flex items-center">
                             <div class="flex gap-1 text-sm text-yellow-400">

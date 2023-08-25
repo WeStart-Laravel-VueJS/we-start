@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useUserStore } from './stores/user';
 const user_store = useUserStore();
 
@@ -7,6 +7,23 @@ const logout = () => user_store.logout();
 // onMounted(() => {
 //     console.log(user_store.user.value);
 // })
+
+const q = ref();
+const search_result = ref([]);
+
+const search = () => {
+    setTimeout(() => {
+        if(q.value.length >= 3) {
+        axios.get('/service/search', {params: {q: q.value}})
+        .then(res => {
+            search_result.value = res.data.data
+        })
+        }else {
+            search_result.value = []
+        }
+    }, 1000)
+}
+
 </script>
 
 <template>
@@ -22,11 +39,18 @@ const logout = () => user_store.logout();
                 <span class="absolute left-4 top-3 text-lg text-gray-400">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </span>
-                <input type="text" name="search" id="search"
+                <input @keyup="search()" type="text" v-model="q" id="search"
                     class="w-full border border-primary border-r-0 pl-12 py-3 pr-3 rounded-l-md focus:outline-none"
                     placeholder="search">
                 <button
                     class="bg-primary border border-primary text-white px-8 rounded-r-md hover:bg-transparent hover:text-primary transition">Search</button>
+                <div v-if="search_result.length > 0" class="absolute p-4 border border-primary rounded-md w-full top-12 bg-white">
+                    <router-link  v-for="service in search_result" :key="service.id" :to="'/service/'+service.slug" class="flex items-center border-b pb-2 mb-2">
+                        <img class="w-14 mr-2" :src="service.image" alt="">
+                        <span>{{ service.name_trans }}</span>
+                    </router-link>                    
+
+                </div>
             </div>
 
             <div class="flex items-center space-x-4">
@@ -203,5 +227,9 @@ const logout = () => user_store.logout();
 <style>
 .router-link-active {
     color: #f58743 !important;
+}
+.img-category {
+    height: 350px;
+    object-fit: contain;
 }
 </style>

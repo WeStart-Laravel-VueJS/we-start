@@ -30,6 +30,10 @@ Route::prefix('v1')->group(function() {
 
     Route::get('category/{category:slug}', [CategoryController::class, 'single']);
 
+    Route::get('service/search', [UserActionsController::class, 'search']);
+
+    Route::get('service/{service:slug}', [UserActionsController::class, 'service']);
+
     Route::middleware('auth:sanctum')->group(function() {
         Route::get('settings', [DashboardController::class, 'settings']);
 

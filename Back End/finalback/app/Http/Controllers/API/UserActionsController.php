@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ServiceResource;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\API\BaseController;
+use App\Http\Resources\SingleServiceResource;
 
 class UserActionsController extends BaseController
 {
@@ -33,7 +34,7 @@ class UserActionsController extends BaseController
         ]);
 
         if($validator->fails()) {
-            return $this->message($validator->errors(), 'Login Failed', false, 500);
+            return $this->message($validator->errors(), 'Adding Service Failed', false, 500);
         }
 
         // foreach($request->all() as $key => $val) {
@@ -45,7 +46,24 @@ class UserActionsController extends BaseController
         $data = $request->except('image', 'gallery', 'name_en', 'name_ar', 'description_en', 'description_ar');
         $data['name'] = null;
         $data['description'] = null;
-        $data['slug'] = Str::slug($request->name_en);
+
+        $slug = Str::slug($request->name_en);
+
+        $slug_count = Service::where('slug', 'like', $slug.'%')->count();
+
+        // return $slug_count;
+        if($slug_count == 0) {
+            $data['slug'] = $slug;
+        }else {
+            $new_slug = $slug.'-'.($slug_count);
+            $slug_count = Service::where('slug', 'like', $new_slug)->count();
+            if($slug_count == 0) {
+                $data['slug'] = $new_slug;
+            }else {
+                $data['slug'] = $new_slug.rand(00,99);
+            }
+        }
+
         $service = $request->user()->services()->create($data);
 
         // upload files
@@ -64,5 +82,26 @@ class UserActionsController extends BaseController
         }
 
         return $this->message(new ServiceResource($service), 'New Service added');
+    }
+
+    function service(Service $service) {
+
+        // $data = new ServiceResource($service);
+        // return $data;
+        return $this->message(new SingleServiceResource($service), 'Service Found');
+    }
+
+    function search(Request $request) {
+        // if(is_numeric($request->q)) {
+        //     $result = Service::where('price', 'like', '%'.$request->q.'%')->get();
+        // }else {
+        //     $result = Service::where('name', 'like', '%'.$request->q.'%')->get();
+        // }
+
+        $result = Service::where('name', 'like', '%'.$request->q.'%')
+        ->orWhere('price', 'like', '%'.$request->q.'%')
+        ->get();
+
+        return $this->message(ServiceResource::collection($result), 'Search Result');
     }
 }

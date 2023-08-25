@@ -12,7 +12,7 @@ class Service extends Model
 
     protected $guarded = [];
 
-    protected $appends = ['name_trans'];
+    protected $appends = ['name_trans', 'description_trans'];
 
     function category() {
         return $this->belongsTo(Category::class)->withDefault();

@@ -86,6 +86,12 @@ const router = createRouter({
       props: true
     },
     {
+      path: '/service/:slug',
+      name: 'show_service',
+      component: () => import('../views/ShowServiceView.vue'),
+      props: true
+    },
+    {
       path: '/:path(.*)',
       name: 'not_found',
       component: () => import('../views/NotFoundView.vue')

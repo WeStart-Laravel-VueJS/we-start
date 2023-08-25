@@ -64,7 +64,7 @@ const logout = () => user_store.logout()
                     <tbody>
                         <tr v-for="service in myservices" :key="service.id">
                             <td>{{ service.id }}</td>
-                            <td>{{ service.name }}</td>
+                            <td>{{ service.name_trans }}</td>
                             <td><img width="80" :src="service.image" alt=""></td>
                             <td>{{ service.price }}</td>
                             <td>{{ service.discount }} - {{ service.discount_type }}</td>
